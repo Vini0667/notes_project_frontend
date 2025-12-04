@@ -1,0 +1,12 @@
+FROM node:24-alpine3.21 AS react-dev
+
+WORKDIR /app
+
+# Set the environment variable to ensure non-interactive install
+ENV DEBIAN_FRONTEND=noninteractive
+
+COPY package-lock.json package.json ./
+
+RUN npm install
+
+EXPOSE 3000
