@@ -29,9 +29,12 @@ const ThemeToggle = () => {
     return (
         <>
             <button
+                data-testid="theme-toggle"
                 onClick={toggleTheme}
                 aria-label={
-                    darkMode ? "Switch to light mode" : "Switch to dark mode"
+                    darkMode
+                        ? "Trocar para o modo claro"
+                        : "Trocar para o modo escuro"
                 }
                 className="p-2 rounded-full text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
             >
