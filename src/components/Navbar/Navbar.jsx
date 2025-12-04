@@ -12,7 +12,10 @@ const Navbar = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16">
                         <div className="flex items-center">
-                            <span className="text-xl font-bold text-gray-900 dark:text-white">
+                            <span
+                                className="text-xl font-bold text-gray-900 dark:text-white"
+                                data-testid="nav-span-check"
+                            >
                                 <span className="text-indigo-600"> React </span>
                                 Notas
                             </span>
@@ -20,7 +23,10 @@ const Navbar = () => {
 
                         {/* Desktop navbar */}
                         <div className="flex items-center">
-                            <nav className="hidden md:flex space-x-4 mr-4">
+                            <nav
+                                className="hidden md:flex space-x-4 mr-4"
+                                data-testid="desktop-nav-check"
+                            >
                                 {navbarOptions.map((item) => (
                                     <a
                                         {...item.options}
@@ -33,8 +39,9 @@ const Navbar = () => {
                                 ))}
                             </nav>
                             <ThemeToggle />
-                            {/* Mobile hamburguer button */}
+                            {/* Hamburger button */}
                             <button
+                                data-testid="hamburger-check"
                                 className="md:hidden ml-4 p-2 text-gray-800 dark:text-gray-200"
                                 onClick={() => setIsOpen(!isOpen)}
                                 aria-expanded={isOpen}
