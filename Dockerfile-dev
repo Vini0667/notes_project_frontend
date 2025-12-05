@@ -20,6 +20,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install --include=dev
 <<<<<<< HEAD
+<<<<<<< HEAD
 COPY --from=react-dev /app/node_modules ./node_modules
 COPY --from=react-dev /app/package*.json ./
 =======
@@ -27,3 +28,8 @@ COPY --from=react-dev /app/package*.json ./
 COPY . .
 
 ENTRYPOINT ["npm", "run", "test:e2e:run"]
+=======
+COPY . .
+
+ENTRYPOINT /bin/sh -c "npm run dev & npm run test:e2e:run"
+>>>>>>> dev
