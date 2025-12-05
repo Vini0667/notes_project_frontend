@@ -23,7 +23,7 @@ const Navbar = () => {
 
                         {/* Desktop navbar */}
                         <div className="flex items-center">
-                            <nav
+                            {/* <nav
                                 className="hidden md:flex space-x-4 mr-4"
                                 data-testid="desktop-nav-check"
                             >
@@ -37,7 +37,7 @@ const Navbar = () => {
                                         {item.description}
                                     </a>
                                 ))}
-                            </nav>
+                            </nav>*/}
                             <ThemeToggle />
                             {/* Hamburger button */}
                             <button

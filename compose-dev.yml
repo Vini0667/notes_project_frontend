@@ -31,3 +31,5 @@ services:
             context: .
             dockerfile: Dockerfile-dev
             target: cypress_runner
+        volumes:
+            - .:/app
