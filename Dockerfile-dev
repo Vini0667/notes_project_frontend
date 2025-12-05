@@ -19,17 +19,6 @@ FROM cypress/browsers:node-24.11.1-chrome-143.0.7499.40-1-ff-145.0.2-edge-142.0.
 WORKDIR /app
 COPY package*.json ./
 RUN npm install --include=dev
-<<<<<<< HEAD
-<<<<<<< HEAD
-COPY --from=react-dev /app/node_modules ./node_modules
-COPY --from=react-dev /app/package*.json ./
-=======
->>>>>>> dev
-COPY . .
-
-ENTRYPOINT ["npm", "run", "test:e2e:run"]
-=======
 COPY . .
 
 ENTRYPOINT /bin/sh -c "npm run dev & npm run test:e2e:run"
->>>>>>> dev
