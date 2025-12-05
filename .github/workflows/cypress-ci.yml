@@ -1,0 +1,25 @@
+name: Tests Workflow
+
+on:
+    pull_request:
+        branches:
+            - main
+            - dev
+jobs:
+    cypress_test:
+        if: github.head_ref != 'devops'
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Check code
+              uses: actions/checkout@v4
+
+            - name: Setup Docker Buildx
+              uses: docker/setup-buildx-action@v3
+
+            - name: Build and run tests
+              run: docker compose -f composer-dev.yml up --build --exit-code-from cypress-test
+
+            - name: Clean container
+              if: always()
+              run: docker compose -f composer-dev.yml down

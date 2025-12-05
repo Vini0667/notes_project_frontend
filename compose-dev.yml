@@ -5,6 +5,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile-dev
+            target: react-dev
         ports:
             - "3000:3000"
         volumes:
@@ -24,4 +25,9 @@ services:
                 reservations:
                     memory: 256M
                     cpus: "0.25"
-        command: ["npx", "vite", "--host", "0.0.0.0"]
+
+    cypress-test:
+        build:
+            context: .
+            dockerfile: Dockerfile-dev
+            target: cypress_runner

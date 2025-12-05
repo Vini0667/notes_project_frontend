@@ -1,0 +1,80 @@
+name: Check files to merge
+
+on:
+    pull_request:
+        types: [opened, synchronize, reopened]
+        branches:
+            - main
+            - dev
+
+jobs:
+    check_modified_files:
+        if: github.head_ref == 'devops'
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+            - name: Find diff files
+              id: files
+              uses: tj-actions/changed-files@v44
+
+            - name: Verify files in main
+              if: ${{ github.base_ref == 'main' }}
+              run: |
+                  echo "Verifying DevOps files to 'Main'..."
+                  ALLOWED_FILES=(
+                    "Dockerfile"
+                    "compose-main.yml"
+                    ".github/workflows/cypress-ci.yml"
+                    ".github/workflows/pr-file-check.yml"
+                  )
+
+                  for file in ${{ steps.files.outputs.all_changed_files }}; do
+                    IS_ALLOWED=false
+
+                    for allowed_file in "${ALLOWED_FILES[@]}"; do
+                      if [[ "$file" == "$allowed_file" ]]; then
+                        IS_ALLOWED=true
+                        break
+                      fi
+                    done
+
+                    if [[ "$IS_ALLOWED" == "false" ]]; then
+                      echo "ERROR: The file: '$file' should not be changed in a PR from “devops” to “main”."
+                      echo "Allowed files: ${ALLOWED_FILES[*]}"
+                      exit 1
+                    fi
+                  done
+                  echo "All changed files comply with the rules of 'main'."
+            - name: PR -> dev
+              if: ${{ github.base_ref == 'dev' }}
+              run: |
+                  echo "Verifying DevOps files to 'Dev'..."
+
+                  ALLOWED_FILES=(
+                    "Dockerfile-dev"
+                    "composer-dev.yml"
+                    ".github/workflows/cypress-ci.yml"
+                    ".github/workflows/pr-file-check.yml"
+                  )
+
+                  for file in ${{ steps.files.outputs.all_changed_files }}; do
+                    IS_ALLOWED=false
+
+                    for allowed_file in "${ALLOWED_FILES[@]}"; do
+                      if [[ "$file" == "$allowed_file" ]]; then
+                        IS_ALLOWED=true
+                        break
+                      fi
+                    done
+
+                    if [[ "$IS_ALLOWED" == "false" ]]; then
+                      echo "ERROR: The file: '$file' should not be changed in a PR from 'devops' to 'dev'."
+                      echo "Allowed files: ${ALLOWED_FILES[*]}"
+                      exit 1 # Falha o job
+                    fi
+                  done
+                  echo "All changed files comply with the rules of 'dev'."
