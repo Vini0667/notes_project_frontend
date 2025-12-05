@@ -21,4 +21,5 @@ COPY package*.json ./
 RUN npm install --include=dev
 COPY . .
 
-ENTRYPOINT /bin/sh -c "npm run dev & npm run test:e2e:run"
+ENTRYPOINT /bin/sh -c "npm run dev & sleep 5 && npm run test:e2e:run"
+
