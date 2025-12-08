@@ -7,20 +7,19 @@ on:
             - dev
 jobs:
     cypress_test:
+        if: github.head_ref != 'devops'
         runs-on: ubuntu-latest
+
         steps:
-            - name: Set compose file
-              id: set-compose
-              run: |
-                  if [ "${{ github.base_ref }}" = "main" ]; then
-                    echo "file=compose.yml" >> $GITHUB_OUTPUT
-                  else
-                    echo "file=compose-dev.yml" >> $GITHUB_OUTPUT
-                  fi
+            - name: Check code
+              uses: actions/checkout@v4
+
+            - name: Setup Docker Buildx
+              uses: docker/setup-buildx-action@v3
 
             - name: Build and run tests
-              run: docker compose -f ${{ steps.set-compose.outputs.file }} up --build --exit-code-from cypress-test
+              run: docker compose -f compose-dev.yml up --build --exit-code-from cypress-test
 
             - name: Clean container
               if: always()
-              run: docker compose -f ${{ steps.set-compose.outputs.file }} down
+              run: docker compose -f compose-dev.yml down
