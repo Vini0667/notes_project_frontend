@@ -56,7 +56,7 @@ jobs:
 
                   ALLOWED_FILES=(
                     "Dockerfile-dev"
-                    "composer-dev.yml"
+                    "compose-dev.yml"
                     ".github/workflows/cypress-ci.yml"
                     ".github/workflows/pr-file-check.yml"
                   )
