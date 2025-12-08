@@ -25,9 +25,3 @@ services:
                 reservations:
                     memory: 256M
                     cpus: "0.25"
-
-    cypress-test:
-        build:
-            context: .
-            dockerfile: Dockerfile-dev
-            target: cypress_runner
