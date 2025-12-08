@@ -33,11 +33,7 @@
         "eslint-plugin-react-refresh": "^0.4.24",
         "globals": "^16.5.0",
         "react-router-dom": "^7.10.1",
-<<<<<<< HEAD
-        "vite": "^7.2.4"
-=======
         "vite": "^7.2.4",
         "vite-plugin-istanbul": "^7.2.1"
->>>>>>> dev
     }
 }
