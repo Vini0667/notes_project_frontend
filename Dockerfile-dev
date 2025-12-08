@@ -1,0 +1,25 @@
+FROM node:24-alpine3.21 AS react-dev
+
+WORKDIR /app
+
+# Set the environment variable to ensure non-interactive install
+ENV DEBIAN_FRONTEND=noninteractive
+
+COPY package*.json ./
+
+RUN npm install
+
+EXPOSE 3000
+
+CMD ["npx", "vite", "--host", "0.0.0.0"]
+
+### ---------------- TEST SETUP --------------------------------###
+FROM cypress/browsers:node-24.11.1-chrome-143.0.7499.40-1-ff-145.0.2-edge-142.0.3595.94-1 AS cypress_runner
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --include=dev
+COPY . .
+
+ENTRYPOINT /bin/sh -c "npm run dev & sleep 5 && npm run test:e2e:run"
+
