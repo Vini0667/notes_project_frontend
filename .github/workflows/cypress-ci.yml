@@ -22,4 +22,4 @@ jobs:
                   node-version: 20
             - run: npm ci
             - name: Start development server, and testing
-              run: npm run dev & sleep 5 && npm test
+              run: npm run dev & sleep 5 && npm run test-comp
