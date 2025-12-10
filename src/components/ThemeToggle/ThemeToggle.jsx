@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { MdLightMode, MdDarkMode } from "react-icons/md";
 
 const ThemeToggle = () => {
@@ -29,7 +29,7 @@ const ThemeToggle = () => {
     return (
         <>
             <button
-                data-testid="theme-toggle"
+                id="theme-toggle"
                 onClick={toggleTheme}
                 aria-label={
                     darkMode
@@ -39,9 +39,9 @@ const ThemeToggle = () => {
                 className="p-2 rounded-full text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
             >
                 {darkMode ? (
-                    <MdLightMode className="w-6 h-6" />
+                    <MdLightMode data-icon="light-mode" className="w-6 h-6" />
                 ) : (
-                    <MdDarkMode className="w-6 h-6" />
+                    <MdDarkMode data-icon="dark-mode" className="w-6 h-6" />
                 )}
             </button>
         </>

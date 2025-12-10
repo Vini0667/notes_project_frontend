@@ -1,4 +1,4 @@
-function FormInput({ label, id, type = "text", ...props }) {
+function FormInput({ label, id, type = "text", error, ...props }) {
     return (
         <div className="mb-4">
             <label
@@ -16,6 +16,11 @@ function FormInput({ label, id, type = "text", ...props }) {
                            transition-colors duration-300 sm:text-sm"
                 {...props}
             />
+            {error && (
+                <>
+                    <p className="text-sm text-red-500 mt-1">{error}</p>{" "}
+                </>
+            )}
         </div>
     );
 }

@@ -8,7 +8,8 @@ pnpm-debug.log*
 lerna-debug.log*
 cypress/screenshots/*
 coverage/*
-.nyc_output/*
+test/.nyc_output/*
+test/coverage/*
 
 node_modules
 dist
