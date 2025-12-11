@@ -17,7 +17,7 @@ const navbarOptions = [
         description: "Cadastrar",
         options: {
             key: 3,
-            href: "#",
+            href: "/singup",
         },
     },
     {
