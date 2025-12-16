@@ -1,5 +1,3 @@
-const API_URL = "http://localhost:9000/api/user/signup";
-
 /**
  * @description Sends the userData in JSON to Back-End API
  *
@@ -10,13 +8,16 @@ const API_URL = "http://localhost:9000/api/user/signup";
  * @throws {Error}
  */
 export default async function registerUser(userData) {
-    const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
+    const response = await fetch(
+        import.meta.env.VITE_API_URL + "/users/register",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userData),
         },
-        body: JSON.stringify(userData),
-    });
+    );
 
     if (!response.ok) {
         const errorData = await response.json();
